@@ -2,22 +2,22 @@
 
 (defrecord Entity [id position current-health type selected? active? owner])
 
-(defmulti onSelected
+(defmulti on-selected
           "Called when the unit is selected"
           :type)
-(defmethod onSelected :default [entity]
+(defmethod on-selected :default [entity]
   (if (:active? entity)
     (assoc entity :selected? true)
     entity))
 
-(defmulti onTurnStart
+(defmulti on-turn-start
           "Called when the turn starts"
           :type)
-(defmethod onTurnStart :default [entity]
+(defmethod on-turn-start :default [entity]
   (assoc entity :active true))
 
-(defmulti onMove
+(defmulti on-move
           "Called when user clicks empty tile when a unit is selected"
           #(:type %1))
-(defmethod onMove :default [entity position]
+(defmethod on-move :default [entity position]
   (assoc entity :position position))
