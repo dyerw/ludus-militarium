@@ -1,10 +1,15 @@
-# ludus_militarium
 
-FIXME: Write a one-line description of your library/project.
+[![ludus_logo.png](http://s14.postimg.org/bgo8gy5dd/ludus_logo.png)]
 
 ## Overview
 
-FIXME: Write a paragraph about the library/project and highlight its goals.
+This is a turn-based strategy game engine for Clojure. It will be able to be used in two ways:
+
+* With declarative scenario files using a basic and flexible ruleset
+* By importing it as a library into your own Clojure projects to create more unique behavior
+
+More docs are forthcoming but for now take a look at the `simple_scenario.cljs` file for an example of
+custom scenarios.
 
 ## Setup
 
@@ -34,6 +39,6 @@ get live reloading, nor a REPL.
 
 ## License
 
-Copyright © 2014 FIXME
+Copyright © 2016 Liam Dyer
 
 Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
