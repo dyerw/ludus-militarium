@@ -1,5 +1,5 @@
 
-[![ludus_logo.png](http://s14.postimg.org/bgo8gy5dd/ludus_logo.png)](http://postimg.org/image/77jies23x/)
+[![ludus_logo.png](http://s14.postimg.org/bgo8gy5dd/ludus_logo.png)]
 
 ## Overview
 
