@@ -8,6 +8,9 @@ This is a turn-based strategy game engine for Clojure. It will be able to be use
 * With declarative scenario files using a basic and flexible ruleset
 * By importing it as a library into your own Clojure projects to create more unique behavior
 
+More docs are forthcoming but for now take a look at the `simple_scenario.cljs` file for an example of
+custom scenarios.
+
 ## Setup
 
 To get an interactive development environment run:
