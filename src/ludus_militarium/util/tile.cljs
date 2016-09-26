@@ -1,8 +1,8 @@
 (ns ludus-militarium.util.tile)
 
-(defn pixel->tile [x y tile-size]
-  {:x (Math/floor (/ tile-size x))
-   :y (Math/floor (/ tile-size y))})
+(defn pixel->tile [position tile-size]
+  {:x (Math/floor (/ (:x position) tile-size))
+   :y (Math/floor (/ (:y position) tile-size))})
 
 (defn tile->center-pixel [position tile-size]
   (let [center-pixel-helper #(+ (* % tile-size) (Math/floor (/ tile-size 2)))]

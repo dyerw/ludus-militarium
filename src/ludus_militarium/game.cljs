@@ -13,8 +13,8 @@
                              (:position %)
                              (:health %)
                              (:type %)
-                             (:selected false)
-                             (:active? true)
+                             false
+                             true
                              (:owner %))
                 (:unit-positions scenario))
           0
@@ -22,3 +22,12 @@
 
 (defn next-turn [game]
   (assoc game :turn []))
+
+(defn position->entity [position game]
+  (first (filter #(= position (:position %)) (:entities game))))
+
+(defn update-entity [entity game]
+  (let [game-without-entity (assoc game
+                              :entities
+                              (filter #(not= (:id entity) (:id %))))]
+    (assoc game :entities (conj (:entities game) entity))))
