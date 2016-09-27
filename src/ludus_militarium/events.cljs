@@ -39,7 +39,9 @@
           state
           :else state
           ))
-      state)))
+      (let [next-turn-game (g/next-turn (g/unselect-all state))]
+        (println "It's now Player " (:turn next-turn-game) "'s turn")
+        next-turn-game))))
 
 (defmethod handle-event "keydown" [event]
   identity)

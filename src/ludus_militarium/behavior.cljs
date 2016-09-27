@@ -19,14 +19,16 @@
           "Called when the turn starts"
           :type)
 (defmethod on-turn-start :default [entity]
-  (assoc entity :active true))
+  (assoc entity :active? true))
 
 (defmulti on-move
           "Called when user clicks empty tile when a unit is selected"
           #(:type %1))
 (defmethod on-move :default [entity position]
-  (assoc entity :position position))
+  (-> entity
+      (assoc :position position)
+      (assoc :movement  (- (:movement entity) (t/distance position (:position entity))))))
 
 (defmulti can-move? #(:type %1))
 (defmethod can-move? :default [entity position]
-  (>= (:movement entity) (dbg (t/distance position (:position entity)))))
+  (>= (:movement entity) (t/distance position (:position entity))))

@@ -5,7 +5,7 @@
 (defrecord Game [players entities turn size])
 (defrecord Player [id color])
 
-(def player-colors ["red" "blue"])
+(def player-colors ["red" "blue" "purple" "orange"])
 
 (defn unit->movement [type unit-types]
   (:movement (first (filter #(= (:id %) type) unit-types))))
@@ -26,7 +26,9 @@
           (:size scenario)))
 
 (defn next-turn [game]
-  (assoc game :turn []))
+  (assoc game :turn
+              (mod (inc (:turn game))
+                   (count (:players game)))))
 
 (defn position->entity [position game]
   (first (filter #(= position (:position %)) (:entities game))))

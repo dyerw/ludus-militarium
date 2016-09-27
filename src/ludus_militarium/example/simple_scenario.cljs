@@ -3,7 +3,7 @@
 (def example-scenario
   {:title "Simple Battle"
    :description "Just a few units having it out"
-   :players 2
+   :players 4
    :size {:height 20 :width 20}
    ;; Empty array is just a grass field
    :terrain []
@@ -101,5 +101,11 @@
                 :owner 1}
                {:type :infantry
                 :position {:x 4 :y 9}
-                :owner 1}]
+                :owner 1}
+              {:type :infantry
+               :position {:x 7 :y 9}
+               :owner 2}
+              {:type :infantry
+               :position {:x 6 :y 15}
+               :owner 3}]
    })
