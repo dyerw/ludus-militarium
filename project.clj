@@ -49,7 +49,7 @@
                 :compiler {:output-to "resources/public/js/compiled/testable.js"
                            :main ludus-militarium.runner
                            :optimizations :none
-                           :target :nodejs}}
+                           :target :phantom}}
                ;; This next build is an compressed minified build for
                ;; production. You can build this with:
                ;; lein cljsbuild once min
