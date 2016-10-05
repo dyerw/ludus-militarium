@@ -10,9 +10,11 @@
                  [org.clojure/clojurescript "1.9.89"]
                  [org.clojure/core.async "0.2.385"
                   :exclusions [org.clojure/tools.reader]]
-                 [play-cljs "0.6.4"]]
+                 [play-cljs "0.6.4"]
+                 [org.clojure/test.check "0.9.0"]]
 
   :plugins [[lein-figwheel "0.5.4-7"]
+            [lein-doo "0.1.7"]
             [lein-cljsbuild "1.1.3" :exclusions [[org.clojure/clojure]]]]
 
   :source-paths ["src"]
@@ -42,6 +44,12 @@
                            ;; To console.log CLJS data-structures make sure you enable devtools in Chrome
                            ;; https://github.com/binaryage/cljs-devtools
                            :preloads [devtools.preload]}}
+               {:id "test"
+                :source-paths ["src" "test"]
+                :compiler {:output-to "resources/public/js/compiled/testable.js"
+                           :main ludus-militarium.runner
+                           :optimizations :none
+                           :target :nodejs}}
                ;; This next build is an compressed minified build for
                ;; production. You can build this with:
                ;; lein cljsbuild once min
