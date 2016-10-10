@@ -1,8 +1,11 @@
 (ns ludus-militarium.game
   "Game state functions and data"
-  (:require [ludus-militarium.behavior :as b]))
+  (:require [cljs.pprint :as pp]))
 
-(defrecord Game [players entities turn size])
+(defn dbg [x] (do (pp/pprint x) x))
+
+(defrecord Entity [id position current-health movement type selected? active? owner])
+(defrecord Game [players entities turn size scenario])
 (defrecord Player [id color])
 
 (def player-colors ["red" "blue" "purple" "orange"])
@@ -12,7 +15,7 @@
 
 (defn load-scenario [scenario]
   (->Game (mapv #(identity {:id % :color (get player-colors %)}) (range (:players scenario)))
-          (mapv #(b/map->Entity {:id             (random-uuid)
+          (mapv #(map->Entity {:id             (random-uuid)
                                  :position       (:position %)
                                  :movement       (unit->movement (:type %)
                                                                  (:unit-types scenario))
@@ -23,15 +26,8 @@
                                  :owner          (:owner %)})
                 (:unit-positions scenario))
           0
-          (:size scenario)))
-
-(defn next-turn [game]
-  (assoc game :turn
-              (mod (inc (:turn game))
-                   (count (:players game)))))
-
-(defn position->entity [position game]
-  (first (filter #(= position (:position %)) (:entities game))))
+          (:size scenario)
+          scenario))
 
 (defn update-entity [entity game]
   (let [game-without-entity (assoc game
@@ -39,6 +35,20 @@
                               (filter #(not= (:id entity) (:id %))
                                       (:entities game)))]
     (assoc game :entities (conj (:entities game-without-entity) entity))))
+
+(defn next-turn [game]
+  (let [next-player                      (mod (inc (:turn game))
+                                              (count (:players game)))
+        next-players-units               (filter #(= (:owner %) next-player)
+                                                 (:entities game))
+        next-players-units-with-movement (map #(assoc % :movement (unit->movement (:type %) (:unit-types (:scenario game))))
+                                              next-players-units)]
+    (-> game
+        (assoc :turn next-player)
+        (#(reduce (fn [g e] (update-entity e g)) % next-players-units-with-movement)))))
+
+(defn position->entity [position game]
+  (first (filter #(= position (:position %)) (:entities game))))
 
 (defn currently-selected-entity [game]
   (first (filter :selected? (:entities game))))

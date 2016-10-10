@@ -1,8 +1,9 @@
 (ns ludus-militarium.behavior
   (:require [ludus-militarium.util.tile :as t]
+            [ludus-militarium.game :as g]
             [cljs.pprint :refer [pprint]]))
 
-(defrecord Entity [id position current-health movement type selected? active? owner])
+
 
 (defn dbg [x] (pprint x) x)
 (defmulti on-selected
@@ -18,8 +19,11 @@
 (defmulti on-turn-start
           "Called when the turn starts"
           :type)
-(defmethod on-turn-start :default [entity]
-  (assoc entity :active? true))
+(defmethod on-turn-start :default [entity game]
+  (-> entity
+      dbg
+      (assoc :movement (g/unit->movement (:type entity) (:unit-types game)))
+      (assoc :active? true)))
 
 (defmulti on-move
           "Called when user clicks empty tile when a unit is selected"
