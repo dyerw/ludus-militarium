@@ -41,7 +41,8 @@
               b/on-selected
               (g/update-entity (g/unselect-all state)))
           ;; Move
-          (and (nil? selected-entity) (b/can-move? (g/currently-selected-entity state) selected-position))
+          (and (nil? selected-entity)
+               (b/can-move? (g/currently-selected-entity state) selected-position))
           (-> (g/currently-selected-entity state)
               (b/on-move selected-position)
               (g/update-entity state))

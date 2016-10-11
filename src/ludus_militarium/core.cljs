@@ -4,6 +4,7 @@
             [ludus-militarium.render :as r]
             [ludus-militarium.config :as cf]
             [ludus-militarium.events :as e]
+            [ludus-militarium.ui.render :refer [mount-all]]
             [ludus-militarium.example.simple-scenario :refer [example-scenario]]
             [cljs.pprint :refer [pprint]]))
 
@@ -32,7 +33,11 @@
 (doto game
   (p/stop)
   (p/start ["keydown" "mousedown" "mousemove"])
-  (p/set-screen main-screen))
+  (p/set-screen main-screen)
+  )
+
+;; Mount non-canvas UI elements
+(mount-all state)
 
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on
