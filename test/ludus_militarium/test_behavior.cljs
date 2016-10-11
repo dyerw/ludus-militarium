@@ -1,5 +1,6 @@
 (ns ludus-militarium.test-behavior
-  (:require [ludus-militarium.behavior :refer [Entity on-selected map->Entity]]
+  (:require [ludus-militarium.behavior :refer [on-selected]]
+            [ludus-militarium.game :refer [Entity map->Entity]]
             [cljs.test :refer-macros [deftest is]]))
 
 (def example-entity (map->Entity {:id "abc"
