@@ -5,7 +5,7 @@
 (defn dbg [x] (do (pp/pprint x) x))
 
 (defrecord Entity [id position current-health movement type selected? active? owner])
-(defrecord Game [players entities turn size scenario])
+(defrecord Game [players entities turn size scenario hovered-entity])
 (defrecord Player [id color])
 
 (def player-colors ["red" "blue" "purple" "orange"])
@@ -27,7 +27,8 @@
                 (:unit-positions scenario))
           0
           (:size scenario)
-          scenario))
+          scenario
+          nil))
 
 (defn update-entity [entity game]
   (let [game-without-entity (assoc game

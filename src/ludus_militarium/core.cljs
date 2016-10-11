@@ -31,7 +31,7 @@
 ;; Get everything rollin'
 (doto game
   (p/stop)
-  (p/start ["keydown" "mousedown"])
+  (p/start ["keydown" "mousedown" "mousemove"])
   (p/set-screen main-screen))
 
 (defn on-js-reload []
