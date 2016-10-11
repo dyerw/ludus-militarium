@@ -1,6 +1,8 @@
 
 ![ludus_logo.png](http://s14.postimg.org/bgo8gy5dd/ludus_logo.png)
 
+[![Build Status](https://travis-ci.org/dyerw/ludus-militarium.svg?branch=master)](https://travis-ci.org/dyerw/ludus-militarium)
+
 ## Overview
 
 This is a turn-based strategy game engine for Clojure. It will be able to be used in two ways:
